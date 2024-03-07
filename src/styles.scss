@@ -3,5 +3,13 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body,
+#root {
+  height: 100%;
+  background-color: #595959;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

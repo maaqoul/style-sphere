@@ -3,23 +3,25 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'ss-product-card-placeholder',
   standalone: true,
-  imports: [],
   template: `
-    @for(item of items; track item) {
-    <div class="animate-pulse flex space-x-4">
-      <div class="squared-full bg-gray-700 h-24 w-24"></div>
-      <div class="flex-1 space-y-4 py-1">
-        <div class="h-4 bg-gray-500 rounded w-3/4"></div>
-        <div class="space-y-2">
-          <div class="h-4 bg-gray-500 rounded"></div>
-          <div class="h-4 bg-gray-500 rounded w-5/6"></div>
-        </div>
+    <article
+      class="border rounded-lg overflow-hidden shadow-lg min-h-[24rem] bg-gray-200 animate-pulse"
+    >
+      <div class="h-48 bg-gray-300"></div>
+      <!-- Image placeholder -->
+      <div class="p-4 space-y-3">
+        <div class="h-6 bg-gray-300 rounded"></div>
+        <!-- Title placeholder -->
+        <div class="h-4 bg-gray-300 rounded w-1/2"></div>
+        <!-- Price placeholder -->
+        <div class="h-4 bg-gray-300 rounded w-3/4"></div>
+        <!-- Description line 1 placeholder -->
+        <div class="h-4 bg-gray-300 rounded w-[80%]"></div>
+        <!-- Description line 2 placeholder -->
+        <div class="h-10 bg-gray-300 rounded w-1/4 mt-4"></div>
+        <!-- Button placeholder -->
       </div>
-    </div>
-    }
+    </article>
   `,
-  styles: ``,
 })
-export class ProductCardPlaceholderComponent {
-  items = Array.from({ length: 20 }, (_, i) => i + 1);
-}
+export class ProductCardPlaceholderComponent {}

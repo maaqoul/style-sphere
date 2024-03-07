@@ -27,20 +27,22 @@ import { ProductCardPlaceholderComponent } from '../../components/product-card-p
     aria-labelledby="products-heading"
     class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12"
   >
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 h-full"
+    >
       @if(!(loading$ | async)&& (products$ | async )) { @for(product of
       (products$ | async); track product.id) {
       <ss-product-card [product]="product" />
-      } } @else {
+      } } @else { @for(item of items; track item) {
       <ss-product-card-placeholder />
-      }
+      } }
     </div>
   </section> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductListingComponent {
   @Input() category!: string;
-
+  readonly items = Array.from({ length: 20 }, (_, i) => i + 1);
   private readonly productService: ProductService = inject(ProductService);
 
   products$!: Observable<Product[] | null>;

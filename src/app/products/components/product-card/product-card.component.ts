@@ -4,6 +4,8 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { Product } from './../../models/product.model';
 import { CartService } from '../../../checkout/cart.service';
+import { ProductDetailsComponent } from '../product-details/product-details.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'ss-product-card',
@@ -11,7 +13,8 @@ import { CartService } from '../../../checkout/cart.service';
   imports: [CurrencyPipe, MatButtonModule],
   template: `
     <article
-      class="flex flex-col justify-between rounded-lg overflow-hidden shadow-lg min-h-[24rem] border border-gray-500 border-opacity-50 p-4"
+      class="flex flex-col justify-between rounded-lg overflow-hidden shadow-lg min-h-[24rem] border border-gray-500 border-opacity-50 p-4 transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl cursor-pointer"
+      (click)="openProductDetails(product)"
     >
       <img
         [src]="product.image"
@@ -28,7 +31,7 @@ import { CartService } from '../../../checkout/cart.service';
           mat-raised-button
           color="primary"
           class="align-self-start mb-2  "
-          (click)="addToCart(product)"
+          (click)="addToCart($event, product)"
         >
           Add to Cart
         </button>
@@ -39,9 +42,19 @@ import { CartService } from '../../../checkout/cart.service';
 export class ProductCardComponent {
   @Input({ required: true }) product!: Product;
 
-  cartService = inject(CartService);
+  private readonly cartService = inject(CartService);
+  private readonly dialog = inject(MatDialog);
 
-  addToCart(product: Product) {
+  addToCart(event: MouseEvent, product: Product) {
+    event.stopPropagation();
     this.cartService.addToCart(product);
+  }
+
+  openProductDetails(product: Product): void {
+    this.dialog.open(ProductDetailsComponent, {
+      data: { product },
+      width: '800px',
+      maxWidth: '90vw',
+    });
   }
 }

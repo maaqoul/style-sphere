@@ -1,27 +1,25 @@
-# StyleSphere
+# Style Sphere Project Overview
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.2.
+## Link For Live Demo
 
-## Development server
+[Style Sphere - Live Demo](https://maaqoul.github.io/style-sphere)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Project Structure
 
-## Code scaffolding
+- **Product Listing Component**: This component displays a grid of products fetched from the backend. It uses Angular Material UI components and Tailwind CSS for styling. The products are fetched using RxJS observables from the ProductService.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Product Card Component**: A reusable component used within the Product Listing component to display individual product cards.
 
-## Build
+- **Cart Sidebar Component**: This component displays the contents of the user's shopping cart. It features the ability to add and remove items, with a dynamic item count displayed in the cart icon.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Product Details Component**: This component provides detailed information about a selected product, including its image, price, and description. It is displayed in a popup modal when a product card is clicked.
 
-## Running unit tests
+- **Search Functionality**: Implemented a search feature allowing users to search for products by title or description.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Testing
 
-## Running end-to-end tests
+- **Product Listing Component**: Thoroughly tested to ensure proper functionality. Due to time constraints, other components have not been extensively tested.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Deployment
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+The application has been successfully deployed to GitHub Pages and is accessible [here](https://maaqoul.github.io/style-sphere).

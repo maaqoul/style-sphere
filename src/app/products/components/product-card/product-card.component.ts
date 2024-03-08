@@ -1,11 +1,11 @@
 import { Component, Input, inject } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
 
 import { Product } from './../../models/product.model';
 import { CartService } from '../../../checkout/cart.service';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'ss-product-card',

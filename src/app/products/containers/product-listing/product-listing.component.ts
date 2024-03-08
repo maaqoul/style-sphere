@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
   SimpleChanges,
@@ -7,7 +8,15 @@ import {
 } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
-import { Observable, catchError, of, switchMap, take } from 'rxjs';
+import {
+  Observable,
+  catchError,
+  combineLatest,
+  map,
+  of,
+  switchMap,
+  take,
+} from 'rxjs';
 
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product.model';
@@ -42,8 +51,11 @@ import { ProductCardPlaceholderComponent } from '../../components/product-card-p
 })
 export class ProductListingComponent {
   @Input() category!: string;
-  readonly items = Array.from({ length: 20 }, (_, i) => i + 1);
+
+  readonly items = Array.from({ length: 20 }, (_, i) => i + 1); // dummy array for the loader skeleton
+
   private readonly productService: ProductService = inject(ProductService);
+  private readonly cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
 
   products$!: Observable<Product[] | null>;
   loading$: Observable<boolean> = this.productService.loading$;
@@ -58,6 +70,30 @@ export class ProductListingComponent {
     } else {
       this.loadAllProducts();
     }
+
+    // if there is a search query
+    combineLatest([
+      this.productService.searchQuery$,
+      this.productService.getProducts(),
+    ])
+      .pipe(
+        map(([searchQuery, products]) => {
+          if (!searchQuery || searchQuery.trim() === '') {
+            return products;
+          }
+          return products?.filter(
+            ({ title, description }) =>
+              title.toLowerCase().includes(searchQuery) ||
+              description.toLowerCase().includes(searchQuery)
+          );
+        })
+      )
+      .subscribe((filteredProducts) => {
+        if (filteredProducts) {
+          this.products$ = of(filteredProducts);
+          this.cdr.markForCheck();
+        }
+      });
   }
 
   loadAllProducts() {

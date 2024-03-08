@@ -8,11 +8,11 @@ import {
   MatDialogModule,
   MatDialogRef,
 } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 import { Product } from './../../models/product.model';
-import { MatIconModule } from '@angular/material/icon';
 import { CartService } from './../../../checkout/cart.service';
-import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'ss-product-details',

@@ -1,5 +1,5 @@
 # Style Sphere Project Overview
-
+Style Sphere is a mini e-commerce application developed as a solution to a coding challenge, the objective of this project is to create a user-friendly/responsive platform for browsing and purchasing products
 ## Link For Live Demo
 
 [Style Sphere - Live Demo](https://maaqoul.github.io/style-sphere)
